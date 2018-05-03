@@ -30,4 +30,23 @@ class BookingController extends Controller
     	->setRowId('id')
     	->make(true);
     }
+
+    /**
+     * delete Booking by ID
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function destroy($id)
+    {
+    	Booking::find($id)->delete();
+    	return response()->json(['done']);
+    }
+
+    public function store(Request $request)
+    {
+    	$data = $request->all();
+    	$data['status'] = '1';
+
+    	return Booking::create($data);
+    }
 }

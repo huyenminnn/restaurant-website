@@ -19,7 +19,9 @@ Auth::routes();
 
 Route::group(['prefix' => 'admin'], function() {
     // Authentication Routes...
+	Route::get('', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
 	Route::get('login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
+
 	Route::post('login', 'AdminAuth\LoginController@login')->name('admin.login.process');
 	Route::post('logout', 'AdminAuth\LoginController@logout')->name('admin.logout');
 
@@ -32,6 +34,10 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::post('password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
 	Route::get('password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm')->name('admin.password.reset');
 	Route::post('password/reset', 'AdminAuth\ResetPasswordController@reset');
+
+});
+
+Route::prefix('admin')->middleware('admin')->group(function(){
 
 	//Redirect to home
 	Route::get('/','AdminController@getIndex')->name('admin.home');
@@ -87,6 +93,34 @@ Route::group(['prefix' => 'admin'], function() {
 
 		Route::get('/listBooking', 'Admin\BookingController@anyData')->name('admin.booking.dataTable');
 
+		Route::delete('/delete/{id}', 'Admin\BookingController@destroy');
+
+		Route::post('/store', 'Admin\BookingController@store')->name('admin.booking.store');
+
+	});
+
+	Route::group(['prefix' => 'pages'], function(){
+		
+		Route::get('/slider', 'Admin\PageController@getSlider')->name('admin.pages.slider');
+
+		Route::get('/loadSlider', 'Admin\PageController@anyData')->name('admin.pages.dataTable');
+
+		Route::delete('/delete/{id}', 'Admin\PageController@destroyImgae');
+	});
+
+	Route::group(['prefix' => 'admins'], function() {
+
+		Route::get('/','Admin\AdminController@adminIndex')->name('admin.admins.list');
+
+		Route::get('/listUser','Admin\AdminController@getListUserDatatables')->name('admin.admins.dataTable');
+
+		Route::get('/{id}','Admin\AdminController@adminUserShow')->name('admin.admins.show');
+
+		Route::post('/store','Admin\AdminController@adminUserStore')->name('admin.admins.store');
+
+		Route::put('/update/{id}','Admin\AdminController@adminUserUpdate')->name('admin.admins.update');
+
+		Route::delete('/delete/{id}','Admin\AdminController@adminUserDelete')->name('admin.admins.delete');
 	});
 
 });

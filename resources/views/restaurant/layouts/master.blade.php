@@ -40,15 +40,15 @@ http://www.templatemo.com/free-website-templates/417-grill
                     <div class="col-md-6">
                         <div class="home-account">
                             <a href="{{ route('restaurant.home') }}">Home</a>
-                            <a href="#">My account</a>
+                            <a href="{{ route('admin.login') }}">Login</a>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <div class="cart-info">
                             <i class="fa fa-shopping-cart"></i>
                             (<a href="#">5 items</a>) in your cart (<a href="#">$45.80</a>)
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

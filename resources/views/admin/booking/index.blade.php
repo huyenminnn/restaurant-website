@@ -34,16 +34,67 @@ Restaurant
 								<div class="modal-body">
 									<form action="" method="POST" role="form" id="formAdd" name="formAdd">
 										@csrf
-										<div class="form-group">
-											<label for="">Name</label>
-											<input type="text" class="form-control" id="name" placeholder="Name" name="name">
-										</div>
-										<div class="form-group">
-											<label for="">Description</label>
-											<input type="text" class="form-control" id="description" placeholder="Description" name="description">
-										</div>
-																			
-
+										<table class="table">											
+											<tr>
+												<td>
+													<div class="form-group">
+														<label for="">Name</label>
+														<input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
+													</div>
+												</td>
+												<td>
+													<div class="form-group">
+														<label for="">Email</label>
+														<input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="form-group">
+														<label for="">Phone</label>
+														<input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" required>
+													</div>
+												</td>
+												<td>
+													<div class="form-group">
+														<label for="">Address</label>
+														<input type="text" class="form-control" id="address" placeholder="Address" name="address" required>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="form-group">
+														<label for="">Date</label>
+														<input type="date" class="form-control" id="date" placeholder="Date" name="date" required>
+													</div>
+												</td>
+												<td>
+													<div class="form-group">
+														<label for="">Time</label>
+														<input type="time" class="form-control" id="time" placeholder="Time" name="time" required>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="form-group">
+														<label for="">Number of guess</label>
+														<input type="number" class="form-control" id="number_of_guess" placeholder="Number of guess" name="number_of_guess">
+													</div>
+												</td>
+												<td>
+											</tr>
+											<tr>
+												<td colspan="2">
+													<div class="form-group">
+														<label for="">Message</label>
+														<textarea name="message" class="form-control" id="message" style="height: 150px"></textarea>
+													</div>													
+												</td>
+											</tr>
+										</table>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 											<button type="submit" class="btn btn-primary">Create</button>
@@ -213,23 +264,24 @@ Restaurant
 		//prevent open new window 
 		event.preventDefault();
 
-		var level = $('#parent-id option:selected').attr('data-level');
-		// alert(level);
 		$.ajax({
-			url: '{{ route('admin.category.store') }}',
+			url: '{{ route('admin.booking.store') }}',
 			type: 'POST',
 			// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
 			data: {
 				name: $('#name').val(),
-				description: $('#description').val(),
-				parent_id: $('#parent-id').val(),
-				level: level,
+				email: $('#email').val(),
+				phone: $('#phone').val(),
+				address: $('#address').val(),
+				date: $('#date').val(),
+				time: $('#time').val(),
+				number_of_guess: $('#number_of_guess').val(),
 			},
 			success: function(response){
-				// alert(response.message);
+
 				$('#modalAdd').modal('hide');
 
-				$('#tbl-category').prepend('<tr id='+response.id+'><td>'+response.id+'</td><td>'+response.name+'</td><td>'+response.parent+'</td><td>'+response.level+'</td><td>'+response.description+'</td><td>'+response.created_at+'</td><td><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-id='+response.id+'></a>&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='+response.id+'></a>&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='+response.id+'></a></td></tr>');
+				$('#tbl-booking').prepend('<tr id='+response.id+'><td>'+response.id+'</td><td>'+response.name+'</td><td>'+response.phone+'</td><td>'+response.email+'</td><td>'+response.date+'</td><td>'+response.time+'</td><td>'+response.number_of_guess+'</td><td>'+status+'</td><td><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-id='+response.id+'></a>&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='+response.id+'></a>&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='+response.id+'></a></td></tr>');
 
 
 				toastr["success"]("Add new Category successfully!");
@@ -245,7 +297,7 @@ Restaurant
 	});
 
 	//delete 
-	$('#tbl-category').on('click','.btnDelete', function(e){
+	$('#tbl-booking').on('click','.btnDelete', function(e){
 
 		var id = $(this).data('id');
 		
@@ -255,7 +307,7 @@ Restaurant
 
 		swal({			
 			title: "Are you sure?",
-			text: "Once deleted, you will delete this sup category!",
+			text: "Once deleted, you will delete this booking!",
 			icon: "warning",
 			buttons: true,
 			dangerMode: true,
@@ -267,11 +319,11 @@ Restaurant
 				$.ajax({
 
 					type: "delete",
-					url: '{{ asset('') }}admin/category/delete/'+id,
+					url: '{{ asset('') }}admin/booking/delete/'+id,
 
 					success: function(res)
 					{
-						toastr.success('The category has been deleted!');
+						toastr.success('The booking has been deleted!');
 						parent.slideUp(300, function () {
 							parent.closest("tr").remove();
 						});
@@ -284,7 +336,7 @@ Restaurant
 				});				
 
 			} else {
-				swal("The category is safety!");
+				swal("The booking is safety!");
 			}
 		});
 	});

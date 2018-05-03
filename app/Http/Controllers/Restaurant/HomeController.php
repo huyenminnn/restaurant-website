@@ -97,7 +97,7 @@ class HomeController extends Controller
             $category_id_list[] = $cate['id'];
         }
 
-        $drink_list = Product::whereIn('category_id',$category_id_list)->paginate(9);
+        $drink_list = Product::whereIn('category_id',$category_id_list)->paginate(6);
         // dd($food_list);
         return view('restaurant.pages.drink', [
             'drink_list' => $drink_list,

@@ -48,7 +48,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{ route('admin.home') }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>T</b>ash</span>
       <!-- logo for regular state and mobile devices -->
@@ -184,7 +184,20 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                 {{--  <a class="btn btn-default btn-flat" href="{{ route('admin.logout') }}">
+                    {{ __('Logout') }}
+                  </a> --}}
+                  <a class="btn btn-default btn-flat" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                  </a>
+
+                  <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form>
+
+                 {{--  <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form> --}}
                 </div>
               </li>
             </ul>
@@ -303,12 +316,24 @@
           </a>
           <ul class="treeview-menu">
             <li><a href=""><i class="fas fa-user"></i> &nbsp;Users</a></li>
-            <li><a href=""><i class="fas fa-user-secret"></i> &nbsp;Admins</a></li>
+            <li><a href="{{ route('admin.admins.list') }}"><i class="fas fa-user-secret"></i> &nbsp;Admins</a></li>
           </ul>
         </li>
-
-
-        <li><a href="https://adminlte.io/docs"><i class="fas fa-book"></i> <span>&nbsp;Documentation</span></a></li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fas fa-book"></i>
+            <span>&nbsp;Page Management</span>
+            <span class="pull-right-container">
+              <i class="fas fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('admin.pages.slider') }}"><i class="fas fa-comment"></i> &nbsp;Slider</a></li>
+            <li><a href=""><i class="fas fa-comment"></i> &nbsp;About us</a></li>
+          </ul>
+        </li>
+  
+        {{-- <li><a href="https://adminlte.io/docs"><i class="fas fa-book"></i> <span>&nbsp;Documentation</span></a></li> --}}
         <li class="header">&nbsp;LABELS</li>
         <li><a href="#"><i class="fas fa-circle text-red"></i> <span>&nbsp;Important</span></a></li>
         <li><a href="#"><i class="fas fa-circle text-yellow"></i> <span>&nbsp;Warning</span></a></li>
