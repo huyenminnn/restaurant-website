@@ -36,12 +36,12 @@ class ProductController extends Controller
     		$product['category_name'] = Category::find($product['category_id'])['name'];
     	}
     	return Datatables::of($list)
-      ->addColumn('action', function ($product) {
-         return '<a name="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-id="'.$product["id"].'" id="row-'.$product["id"].'"></a>&nbsp;<a name="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='.$product["id"].'></a>&nbsp;<a name="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='.$product["id"].'></a>';
-     })
-      ->setRowId('id')
-      ->make(true);
-  }
+        ->addColumn('action', function ($product) {
+            return '<a name="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-id="'.$product["id"].'" id="row-'.$product["id"].'"></a>&nbsp;<a name="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='.$product["id"].'></a>&nbsp;<a name="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='.$product["id"].'></a>';
+        })
+        ->setRowId('id')
+        ->make(true);
+    }
 
     /**
      * create an product and save to db
@@ -131,7 +131,7 @@ class ProductController extends Controller
     {
         $data = $request->all();
         $date = date('YmdHis', time());
-        dd($data);
+        
         if ($request->hasFile('thumbnail')) {
 
             $extension = '.'.$data['thumbnail']->getClientOriginalExtension();
@@ -141,7 +141,6 @@ class ProductController extends Controller
             $data['thumbnail']->storeAs('public/products',$file_name);
 
             $data['thumbnail'] = 'storage/products/'.$file_name;
-
         }
 
         $data['slug'] = str_slug($request->name);

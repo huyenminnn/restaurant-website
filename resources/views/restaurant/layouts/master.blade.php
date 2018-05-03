@@ -63,10 +63,11 @@ http://www.templatemo.com/free-website-templates/417-grill
                     <div class="col-md-6">
                         <div class="main-menu">
                             <ul>
-                                <li><a href="{{ route('restaurant.home') }}">Home</a></li>
-                                <li><a href="{{ route('restaurant.aboutUs') }}">About</a></li>
-                                <li><a href="">Products</a></li>
+                                <li><a href="{{ route('restaurant.home') }}">Home</a></li>                                
+                                <li><a href="{{ route('restaurant.food') }}">Food</a></li>
+                                <li><a href="{{ route('restaurant.drink') }}">Drinks</a></li>
                                 <li><a href="{{ route('restaurant.booking') }}">Booking</a></li>
+                                <li><a href="{{ route('restaurant.aboutUs') }}">About</a></li>
                             </ul>
                         </div>
                     </div>
@@ -188,6 +189,7 @@ http://www.templatemo.com/free-website-templates/417-grill
     <script src="{{ asset('restaurant/js/vendor/jquery.gmap3.min.js') }}"></script>
     <script src="{{ asset('restaurant/js/plugins.js') }}"></script>
     <script src="{{ asset('restaurant/js/main.js') }}"></script>
+    @yield('js.section')
 
 </body>
 </html>

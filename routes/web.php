@@ -76,6 +76,19 @@ Route::group(['prefix' => 'admin'], function() {
 
 	});
 
+	Route::group(['prefix' => 'customers'], function() {
+
+	    Route::get('/', 'Admin\UserController@getIndex')->name('admin.user.list');
+	});
+
+	Route::group(['prefix' => 'booking'], function(){
+
+		Route::get('/', 'Admin\BookingController@getIndex')->name('admin.booking.list');
+
+		Route::get('/listBooking', 'Admin\BookingController@anyData')->name('admin.booking.dataTable');
+
+	});
+
 });
 
 
@@ -83,4 +96,10 @@ Route::get('/', 'Restaurant\HomeController@getIndex')->name('restaurant.home');
 
 Route::get('/about-us', 'Restaurant\HomeController@getAboutUs')->name('restaurant.aboutUs');
 
-Route::get('/contact-us', 'Restaurant\HomeController@getFormBooking')->name('restaurant.booking');
+Route::get('/booking', 'Restaurant\HomeController@getFormBooking')->name('restaurant.booking');
+
+Route::post('/booking', 'Restaurant\HomeController@booking')->name('restaurant.process_booking');
+
+Route::get('/food', 'Restaurant\HomeController@getFood')->name('restaurant.food');
+
+Route::get('/drink', 'Restaurant\HomeController@getDrink')->name('restaurant.drink');

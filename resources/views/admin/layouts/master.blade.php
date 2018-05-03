@@ -254,7 +254,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fas fa-check-circle"></i>&nbsp;Booking</a></li>
+            <li><a href="{{ route('admin.booking.list') }}"><i class="fas fa-check-circle"></i>&nbsp;Booking</a></li>
             <li><a href="#"><i class="fas fa-circle"></i>&nbsp;List table</a></li>
             {{-- <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i>Products
