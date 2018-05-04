@@ -42,6 +42,28 @@ Restaurant
 											<label for="">Description</label>
 											<input type="text" class="form-control" id="description" placeholder="Description" name="description">
 										</div>
+										<div class="form-group">
+											<label for="">
+												<i class="fa fa-picture-o font-green" aria-hidden="true">Image</i>
+											</label>			
+											<div class="fileinput fileinput-new" data-provides="fileinput">
+												<div class="fileinput-new thumbnail" style="max-width: 250px;">
+													<img id="previewimg" src="" alt="No Image" class="img-responsive" /> 
+												</div>
+												<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 250px; max-height: 200px;"> </div>
+												<div style="margin-top: 10px;">
+													<span class="input-group-btn">
+														<a id="lfm" data-input="thumbnail" data-preview="previewimg" class="btn btn-primary">
+															<input type="file" name="thumbnail" id="thumbnail">
+														</a>
+													</span>
+													@if ($errors->has('thumbnail'))
+													<span class="errors">{{$errors->first('thumbnail')}}</span>
+													@endif
+
+												</div>
+											</div>
+										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 											<button type="submit" class="btn btn-primary">Create</button>
@@ -115,17 +137,14 @@ Restaurant
 		//prevent open new window 
 		event.preventDefault();
 
-		var level = $('#parent-id option:selected').attr('data-level');
-		// alert(level);
 		$.ajax({
-			url: '{{ route('admin.category.store') }}',
+			url: '{{ route('admin.pages.store') }}',
 			type: 'POST',
 			// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
 			data: {
-				name: $('#name').val(),
+				title: $('#name').val(),
 				description: $('#description').val(),
-				parent_id: $('#parent-id').val(),
-				level: level,
+				image: $('#thumbnail').get(0).files[0],
 			},
 			success: function(response){
 				// alert(response.message);
@@ -140,8 +159,8 @@ Restaurant
 				$errs = xhr.responseJSON.errors;
 				console.log($errs);
 				toastr['error'](errorThrown);
-				toastr['error']($errs['name'][0]);
-				toastr['error']($errs['description'][0]);
+				// toastr['error']($errs['name'][0]);
+				// toastr['error']($errs['description'][0]);
 			} 
 		})
 	});

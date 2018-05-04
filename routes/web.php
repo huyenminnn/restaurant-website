@@ -79,7 +79,6 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	    Route::put('/update/{id}', 'Admin\ProductController@update');
 
 	    Route::delete('/delete/{id}', 'Admin\ProductController@destroy');
-
 	});
 
 	Route::group(['prefix' => 'customers'], function() {
@@ -104,6 +103,8 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 		Route::get('/slider', 'Admin\PageController@getSlider')->name('admin.pages.slider');
 
 		Route::get('/loadSlider', 'Admin\PageController@anyData')->name('admin.pages.dataTable');
+
+		Route::post('/slider', 'Admin\PageController@storeImage')->name('admin.pages.store');
 
 		Route::delete('/delete/{id}', 'Admin\PageController@destroyImgae');
 	});

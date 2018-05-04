@@ -5,7 +5,7 @@
 <div class="container" >
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2 text">
-            <h1 style="color: white"><strong>Welcome to Tash Restaurant</strong></h1>
+            <h1 style="color: white"><strong>Welcome to Tash</strong></h1>
         </div>
     </div>
     <div class="row">
