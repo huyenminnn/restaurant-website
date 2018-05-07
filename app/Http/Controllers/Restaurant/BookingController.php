@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Restaurant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Booking;
+use App\BookingDetails;
 
 class BookingController extends Controller
 {
@@ -13,7 +15,7 @@ class BookingController extends Controller
 	 * @param  Request $request [description]
 	 * @return [type]           [description]
 	 */
-	public function booking($id)
+	public function bookProduct($id)
 	{
 		// \Cart::destroy();
 		$product = Product::find($id);
@@ -75,5 +77,64 @@ class BookingController extends Controller
 			'total'=> \Cart::total(),
 			'tax' =>\Cart::tax()
 		);
+	}
+
+	/**
+	 * decrease quantity of food/ drink
+	 * @param  Request $request [description]
+	 * @return food/drink has been updated
+	 */
+	public function decrease($rowId)
+	{		
+		$item = \Cart::get($rowId);
+		if ($item->qty==1) {
+			return array(
+				'item'=>\Cart::remove($rowId),
+				'total' => \Cart::total(),
+				'tax' => \Cart::tax(),
+			);
+		} else {
+			$product = Product::find($item->id);	
+			return array(
+				'item'=> \Cart::update($rowId,  [
+					'qty'=>$item->qty-1,
+					'thumbnail' => $product['thumbnail'],
+					'origin_price' =>$product['origin_price']
+				]),
+				'total'=> \Cart::total(),
+				'tax' =>\Cart::tax()
+			);
+		}		
+	}
+
+
+	/**
+	 * save booking 's information to db'
+	 * @param  Request $request [description]
+	 * @return [type]           [description]
+	 */
+	public function booking(Request $request)
+	{
+		// \Cart::destroy();
+		$data = $request->all();
+		$rows = \Cart::content();
+		if ($rows->count()==0) {
+			$data['total']=0;
+			Booking::create($data);			
+		} else {
+			$data['total']=\Cart::total();
+			$booking = Booking::create($data);
+			foreach ($rows as $item) {
+				$data =[
+					'booking_id' => $booking['id'],
+					'product_id' => $item->id,
+					'quantity' => $item->qty,
+					'price' => $item->price,
+				];
+				BookingDetails::create($data);
+			}
+		}
+		\Cart::destroy();
+		return redirect()->back();
 	}
 }

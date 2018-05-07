@@ -52,7 +52,7 @@ http://www.templatemo.com/free-website-templates/417-grill
                         <div class="cart-info">
                             <a href="{{ route('restaurant.booking.list') }}" >
                                 <i class="fa fa-shopping-cart" style="height: 25px"></i>
-                                (<span class="total-items"></span> items)
+                                (<span class="total-items">@yield('items')</span> items)
                             </a>                            
                         </div>
                     </div>

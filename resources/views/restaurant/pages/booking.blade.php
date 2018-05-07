@@ -39,42 +39,42 @@
 											<tr>
 												<td>
 													<div class="form-group">
-														<label for="">Name</label>
-														<input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
+														<label for="">Name (*)</label>
+														<input type="text" class="form-control" id="name" placeholder="Name" name="name" >
 													</div>
 												</td>
 												<td>
 													<div class="form-group">
-														<label for="">Email</label>
-														<input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+														<label for="">Email(*)</label>
+														<input type="email" class="form-control" id="email" placeholder="Email" name="email" >
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td>
 													<div class="form-group">
-														<label for="">Phone</label>
-														<input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" required>
+														<label for="">Phone (*)</label>
+														<input type="text" class="form-control" id="phone" placeholder="Phone" name="phone" >
 													</div>
 												</td>
 												<td>
 													<div class="form-group">
 														<label for="">Address</label>
-														<input type="text" class="form-control" id="address" placeholder="Address" name="address" required>
+														<input type="text" class="form-control" id="address" placeholder="Address" name="address" >
 													</div>
 												</td>
 											</tr>
 											<tr>
 												<td>
 													<div class="form-group">
-														<label for="">Date</label>
-														<input type="date" class="form-control" id="date" placeholder="Date" name="date" required>
+														<label for="">Date(*)</label>
+														<input type="date" class="form-control" id="date" placeholder="Date" name="date" >
 													</div>
 												</td>
 												<td>
 													<div class="form-group">
-														<label for="">Time</label>
-														<input type="time" class="form-control" id="time" placeholder="Time" name="time" required>
+														<label for="">Time(*)</label>
+														<input type="time" class="form-control" id="time" placeholder="Time" name="time" >
 													</div>
 												</td>
 											</tr>
@@ -85,56 +85,22 @@
 														<input type="number" class="form-control" id="number_of_guess" placeholder="Number of guess" name="number_of_guess">
 													</div>
 												</td>
-												<td>
-													{{-- <div class="form-group">
-														<label for="">Children</label>
-														<input type="number" class="form-control" id="children" placeholder="Children" name="children">
-													</div> --}}
-												</td>
+												<td></td>
 											</tr>
 											<tr>
 												<td colspan="2">
 													<div class="form-group">
 														<label for="">Message</label>
 														<textarea name="message" class="form-control" id="message" style="height: 150px"></textarea>
-													</div>
-													
+													</div>													
 												</td>
 											</tr>
 
 										</table>
 										<div class="text-center">
-											<button type="submit" class="btn btn-primary">Booking</button>
+											<button type="submit" class="btn btn-primary">Submit</button>
 										</div>										
 									</form>
-									{{-- <form action="#" method="post" class="send-message">
-										<div class="row">
-											<div class="name col-md-6">
-												<input type="text" name="name" id="name" placeholder="Name" />
-											</div>
-											<div class="email col-md-6">
-												<input type="email" name="email" id="email" placeholder="Email" />
-											</div>
-										</div>
-										<div class="clearfix">											
-										</div>
-										<div class="row">
-											<div class="col-md-6">
-												<input type="number" name="adults" id="adults" />
-											</div>
-											<div class="col-md-6">
-												<input type="number" name="children" id="children" />
-											</div>
-										</div>
-										<div class="row">        
-											<div class="text col-md-12">
-												<textarea name="text" placeholder="Message"></textarea>
-											</div>   
-										</div>                              
-										<div class="send">
-											<button type="submit">Booking</button>
-										</div>
-									</form> --}}
 								</div>
 							</div>
 							<div class="col-md-4">

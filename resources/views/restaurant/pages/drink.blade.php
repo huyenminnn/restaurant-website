@@ -7,7 +7,7 @@
 			<div class="col-md-12">
 				<div class="heading-content">
 					<h2>Drink</h2>
-					<span>Home / <a href="{{ route('restaurant.food') }}">Drink</a></span>
+					<span>Home / <a href="{{ route('restaurant.drink') }}">Drink</a></span>
 				</div>
 			</div>
 		</div>
@@ -25,7 +25,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" id="drink_list">
 			@foreach ($drink_list as $drink)			
 			<div class="col-md-4 col-sm-6">
 				<div class="blog-post">
@@ -36,9 +36,9 @@
 						<div class="content-show">
 							<h4>
 								<a href="">{{$drink['name']}}</a>
-								<a href="" style="float: right;"><button class="fa fa-glass btn btn-sm btn-danger btnAddDrink" style="color: white"></button></a>
+								<a href="" style="float: right;" data-id="{{$drink['id']}}" id="addDrink-{{$drink['id']}}" class="addDrink"><button class="fa fa-glass btn btn-sm btn-danger" style="color: white"></button></a>
 							</h4>
-							<span>{{$drink['sale_price']}} $ </span>/ 
+							<span>{{$drink['price']}} $ </span>/ 
 							<strong style="color: red"><strike>{{$drink['origin_price']}} $</strike></strong>
 						</div>
 						<div class="content-hide">
@@ -55,21 +55,27 @@
 	</div>
 </div>
 @endsection
-
-<script src="">
+@section('js.section')
+<script>
 	$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN' : $('meta[name="csrf_token"]').attr('content')
 		}
 	});
 
-	$('.btnAddDrink').on('click', function(event){
+	$('#drink_list').on('click', '.addDrink', function(event){
 		event.preventDefault();
+		var id = $(this).data('id');
 		$.ajax({
-			url: '',
-			type: 'default GET (Other values: POST)',
-			dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-			data: {param1: 'value1'},
-		})		
+			url: '{{ asset('') }}booking/'+id,
+			type: 'GET',
+			success: function(res){				
+				toastr['success']('You added "'+res.name+'" to order list successfully!');
+			},
+			error: function(xhr, ajaxOptions, thrownError){
+				toastr['error']('You added this drink failed!');
+			}
+		})
 	})
 </script>
+@endsection

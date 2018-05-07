@@ -17,7 +17,9 @@ class HomeController extends Controller
 	 */
     public function getIndex()
     {
-    	return view('restaurant.index');
+        $rows = \Cart::content();
+        $items = $rows->count();
+    	return view('restaurant.index',['items'=>$items]);
     }
 
 
@@ -102,14 +104,5 @@ class HomeController extends Controller
         return view('restaurant.pages.drink', [
             'drink_list' => $drink_list,
         ]);
-    }
-
-
-    public function booking(Request $request)
-    {
-        $data = $request->all();
-        // dd($data);
-        Booking::create($data);
-        return redirect()->back();
     }
 }

@@ -22,6 +22,9 @@ class CreateBookingTable extends Migration
             $table->string('date')->nullable();
             $table->string('time')->nullable();
             $table->Integer('number_of_guess')->nullable();
+            $table->text('message')->nullable();
+            $table->float('total')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
