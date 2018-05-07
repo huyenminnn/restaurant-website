@@ -17,6 +17,10 @@ http://www.templatemo.com/free-website-templates/417-grill
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="{{ asset('restaurant/css/bootstrap.css') }}">
@@ -27,6 +31,7 @@ http://www.templatemo.com/free-website-templates/417-grill
     <link rel="stylesheet" href="{{ asset('restaurant/css/testimonails-slider.css') }}">
 
     <script src="{{ asset('restaurant/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('admins/bower_components/toastr/build/toastr.min.css') }}">
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -43,12 +48,14 @@ http://www.templatemo.com/free-website-templates/417-grill
                             <a href="{{ route('admin.login') }}">Login</a>
                         </div>
                     </div>
-                    {{-- <div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="cart-info">
-                            <i class="fa fa-shopping-cart"></i>
-                            (<a href="#">5 items</a>) in your cart (<a href="#">$45.80</a>)
+                            <a href="{{ route('restaurant.booking.list') }}" >
+                                <i class="fa fa-shopping-cart" style="height: 25px"></i>
+                                (<span class="total-items"></span> items)
+                            </a>                            
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -186,10 +193,34 @@ http://www.templatemo.com/free-website-templates/417-grill
 
 
     <script src="{{ asset('restaurant/js/vendor/jquery-1.11.0.min.js') }}"></script>
+    <!-- jQuery 3 -->
+    <script src="{{ asset('admins/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    {{-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script> --}}
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{{ asset('admins/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('restaurant/js/vendor/jquery.gmap3.min.js') }}"></script>
     <script src="{{ asset('restaurant/js/plugins.js') }}"></script>
     <script src="{{ asset('restaurant/js/main.js') }}"></script>
+    <script src="{{ asset('admins/bower_components/toastr/toastr.js') }}"></script>
     @yield('js.section')
-
+    <script >
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": false,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+      }
+  </script>
 </body>
 </html>

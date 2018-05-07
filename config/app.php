@@ -163,6 +163,8 @@ return [
         //DataTable
         Yajra\DataTables\DataTablesServiceProvider::class,
 
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+
     ],
 
     /*
@@ -214,6 +216,8 @@ return [
 
         //DataTables
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
 
     ],
 

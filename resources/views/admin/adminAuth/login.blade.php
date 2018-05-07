@@ -4,15 +4,15 @@
 <a href="{{ route('admin.register') }}" title="Resgister" style="position: absolute; z-index: 100; right: 5%; top: 50px;" class="btn btn-success btn-circle btn-xl fa fa-link"></a>
 <div class="container" >
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 text">
-            <h1 style="color: white"><strong>Welcome to Tash</strong></h1>
+        <div class="col-sm-8 col-sm-offset-2 text" style="height: 80px">
+            {{-- <h1 style="color: white"><strong>Welcome to Tash</strong></h1> --}}
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3 form-box">
             <div class="form-top">
-                <h3 >Login to our site</h3>
-
+                <h2 style=" color: black" class="text-center">Welcome to TASH</h2>
+                {{-- <h1 style="color: blue"><strong>Welcome to Tash</strong></h1> --}}
                 <div class="form-bottom">
                     <form role="form" action="{{ route('admin.login.process') }}" method="post" class="login-form">
                         @csrf
