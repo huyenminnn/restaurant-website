@@ -91,6 +91,7 @@ Restaurant
 								<th>Title</th>
 								<th>Description</th>
 								<th>Status</th>
+								<th>Created at</th>
 								<th width="15%">Action</th>
 							</tr>
 						</thead>
@@ -132,8 +133,9 @@ Restaurant
 				return '<img src=\"http://tash.restaurant/'+data+'" alt="" height="80px">' }
 			},
 			{ data: 'title', name: 'title' },
-			{ data: 'description', name: 'description' },
+			{ data: 'description', name: 'description' },			
 			{ data: 'status', name: 'status' },
+			{ data: 'created_at', name: 'created_at' },
 			{ data: 'action', name: 'action', orderable: false, searchable: false}
 			]
 		});
@@ -142,30 +144,35 @@ Restaurant
 	$('#formAdd').on('submit',  function(event) {
 		//prevent open new window 
 		event.preventDefault();
-		// alert($("input[name='status']:checked").val());
+		var status = $("input[name='status']:checked").val();
+		var thumbnail = $('#thumbnail').get(0).files[0];
+
+		var newSlide = new FormData();
+
+		newSlide.append('title',$('#title').val());
+		newSlide.append('thumbnail',thumbnail);
+		newSlide.append('status',status);
+		newSlide.append('description',$('#description').val());
 
 		$.ajax({
 			url: '{{ route('admin.pages.store') }}',
 			type: 'POST',
-			// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-			data: {
-				title: $('#name').val(),
-				description: $('#description').val(),
-				image: $('#thumbnail').get(0).files[0],
-				status: $("input[name='status']:checked").val(),
-			},
+			processData: false,
+			contentType: false,
+			cache: false,
+			dataType: 'JSON',
+			data: newSlide,
 			success: function(response){
 				// alert(response.message);
 				$('#modalAdd').modal('hide');
 
-				$('#tbl-slider').prepend('<tr id='+response.id+'><td>'+response.id+'</td><td>'+response.name+'</td><td>'+response.parent+'</td><td>'+response.level+'</td><td>'+response.description+'</td><td>'+response.created_at+'</td><td><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-id='+response.id+'></a>&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='+response.id+'></a>&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='+response.id+'></a></td></tr>');
+				$('#tbl-slider').prepend('<tr id='+response.id+'><td>'+response.id+'</td><td style="width: 20%"><img src="{{ asset('') }}'+response.image+'" class=" img-responsive img-rounded" style=""></td><td>'+response.title+'</td><td>'+response.description+'</td><td>'+response.status+'</td><td>'+response.created_at+'</td><td><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-id='+response.id+'></a>&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='+response.id+'></a>&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='+response.id+'></a></td></tr>');
 
 
 				toastr["success"]("Add new Image successfully!");
 			},
 			error: function(xhr, status, errorThrown){
 				$errs = xhr.responseJSON.errors;
-				console.log($errs);
 				toastr['error'](errorThrown);
 			} 
 		})
@@ -198,7 +205,7 @@ Restaurant
 
 					success: function(res)
 					{
-						toastr.success('The category has been deleted!');
+						toastr.success('The image has been deleted!');
 						parent.slideUp(300, function () {
 							parent.closest("tr").remove();
 						});
@@ -211,7 +218,7 @@ Restaurant
 				});				
 
 			} else {
-				swal("The category is safety!");
+				swal("The image is safety!");
 			}
 		});
 	});

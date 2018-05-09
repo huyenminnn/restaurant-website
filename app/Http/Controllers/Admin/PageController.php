@@ -40,21 +40,27 @@ class PageController extends Controller
     public function storeImage(Request $request)
     {
         $data = $request->all();
+        $date = date('YmdHis', time());
+        $slide = array(
+            'title' =>$request->all()['title'],
+            'description' =>$request->all()['description'],
+            'status' =>$request->all()['status'],
+        );
         
         if ($request->hasFile('thumbnail')) {
 
-            $extension = '.'.$data['image']->getClientOriginalExtension();
+            $extension = '.'.$data['thumbnail']->getClientOriginalExtension();
 
             $file_name = md5($request->name).'_'. $date . $extension;
 
-            $data['image']->storeAs('public/sliders',$file_name);
+            $data['thumbnail']->storeAs('public/sliders',$file_name);
 
-            $data['image'] = 'storage/sliders/'.$file_name;
+            $slide['image'] = 'storage/sliders/'.$file_name;
 
         }else {
             // $imageName='posts/userDefault.png';
         }
-        $slider = Slider::create($data);
+        $slider = Slider::create($slide);
         
         return $slider;
     }
