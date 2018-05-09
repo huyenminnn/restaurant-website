@@ -40,8 +40,7 @@ class PageController extends Controller
     public function storeImage(Request $request)
     {
         $data = $request->all();
-        $data['hidden'] = 0;
-
+        
         if ($request->hasFile('thumbnail')) {
 
             $extension = '.'.$data['image']->getClientOriginalExtension();
@@ -56,6 +55,7 @@ class PageController extends Controller
             // $imageName='posts/userDefault.png';
         }
         $slider = Slider::create($data);
+        
         return $slider;
     }
 }

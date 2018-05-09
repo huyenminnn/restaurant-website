@@ -33,14 +33,20 @@ Restaurant
 								</div>
 								<div class="modal-body">
 									<form action="" method="POST" role="form" id="formAdd" name="formAdd">
-										@csrf
+										@csrf										
 										<div class="form-group">
-											<label for="">Name</label>
-											<input type="text" class="form-control" id="name" placeholder="Name" name="name">
+											<label for="">Title</label>
+											<input type="text" class="form-control" id="title" placeholder="Title" name="title" required="">
 										</div>
 										<div class="form-group">
 											<label for="">Description</label>
-											<input type="text" class="form-control" id="description" placeholder="Description" name="description">
+											<input type="text" class="form-control" id="description" placeholder="Description" name="description" required="">
+										</div>
+										<div class="form-group">
+											<label for="">Status</label>
+											<br>
+											<input type="radio" name="status" value="0" placeholder="Hidden" checked="true">Hidden							
+											<input type="radio" name="status" value="1" placeholder="Display">Display							
 										</div>
 										<div class="form-group">
 											<label for="">
@@ -54,7 +60,7 @@ Restaurant
 												<div style="margin-top: 10px;">
 													<span class="input-group-btn">
 														<a id="lfm" data-input="thumbnail" data-preview="previewimg" class="btn btn-primary">
-															<input type="file" name="thumbnail" id="thumbnail">
+															<input type="file" name="thumbnail" id="thumbnail" >
 														</a>
 													</span>
 													@if ($errors->has('thumbnail'))
@@ -84,7 +90,7 @@ Restaurant
 								<th>Image</th>
 								<th>Title</th>
 								<th>Description</th>
-								<th>Hidden</th>
+								<th>Status</th>
 								<th width="15%">Action</th>
 							</tr>
 						</thead>
@@ -127,7 +133,7 @@ Restaurant
 			},
 			{ data: 'title', name: 'title' },
 			{ data: 'description', name: 'description' },
-			{ data: 'hidden', name: 'hidden' },
+			{ data: 'status', name: 'status' },
 			{ data: 'action', name: 'action', orderable: false, searchable: false}
 			]
 		});
@@ -136,6 +142,7 @@ Restaurant
 	$('#formAdd').on('submit',  function(event) {
 		//prevent open new window 
 		event.preventDefault();
+		// alert($("input[name='status']:checked").val());
 
 		$.ajax({
 			url: '{{ route('admin.pages.store') }}',
@@ -145,6 +152,7 @@ Restaurant
 				title: $('#name').val(),
 				description: $('#description').val(),
 				image: $('#thumbnail').get(0).files[0],
+				status: $("input[name='status']:checked").val(),
 			},
 			success: function(response){
 				// alert(response.message);
@@ -159,8 +167,6 @@ Restaurant
 				$errs = xhr.responseJSON.errors;
 				console.log($errs);
 				toastr['error'](errorThrown);
-				// toastr['error']($errs['name'][0]);
-				// toastr['error']($errs['description'][0]);
 			} 
 		})
 	});
