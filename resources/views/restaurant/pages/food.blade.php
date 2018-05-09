@@ -90,7 +90,7 @@
 		event.preventDefault();
 		var id = $(this).data('id');
 		$.ajax({
-			url: '{{ asset('') }}booking-food/'+id,
+			url: '{{ asset('') }}booking/'+id,
 			type: 'GET',
 			success: function(res){				
 				toastr['success']('You added "'+res.name+'" to order list successfully!');

@@ -1,6 +1,10 @@
 @extends('restaurant.layouts.master')
 
+@section('items')
+	{{$items}}
+@endsection
 @section('slider')
+
 <div id="slider">
 	<div class="flexslider">
 		<ul class="slides">
@@ -242,4 +246,7 @@
 		</div>
 	</div>
 </div>
+@endsection
+@section('js.section')
+
 @endsection

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateBookingTable extends Migration
+class UpdateSlidersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class UpdateBookingTable extends Migration
      */
     public function up()
     {
-        Schema::table('booking', function (Blueprint $table) {
-            $table->tinyInteger('status')->default(1);
+        Schema::table('sliders', function (Blueprint $table) {
+            $table->renameColumn('hidden', 'status');
         });
     }
 
@@ -25,8 +25,8 @@ class UpdateBookingTable extends Migration
      */
     public function down()
     {
-        Schema::table('booking', function (Blueprint $table) {
-            $table->dropColumn('status');
+        Schema::table('sliders', function (Blueprint $table) {
+            $table->renameColumn('status', 'hidden');
         });
     }
 }

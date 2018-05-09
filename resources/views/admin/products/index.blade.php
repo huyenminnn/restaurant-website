@@ -100,7 +100,7 @@ Products
 								<td>
 									<div class="form-group">
 										<label for="">Sale price</label>
-										<input type="text" class="form-control" id="sale_price" placeholder="Sale price" name="sale_price" >
+										<input type="text" class="form-control" id="price" placeholder="Sale price" name="price" >
 									</div>
 								</td>
 							</tr>
@@ -250,7 +250,7 @@ Products
 								<td>
 									<div class="form-group">
 										<label for="">Sale price</label>
-										<input type="text" class="form-control" id="sale_price" placeholder="Sale price" name="sale_price" >
+										<input type="text" class="form-control" id="price" placeholder="Sale price" name="price" >
 									</div>
 								</td>
 							</tr>
@@ -369,7 +369,7 @@ Products
 		newProduct.append('category_id',$('#category_id').val());
 		newProduct.append('thumbnail',thumbnail);
 		newProduct.append('origin_price',$('#origin_price').val());
-		newProduct.append('sale_price',$('#sale_price').val());
+		newProduct.append('price',$('#price').val());
 
 		$.ajax({
 			url: '{{ route('admin.product.store') }}',
@@ -427,7 +427,7 @@ Products
 				$('#formEdit #edit-id').val(res.id);
 				$('#formEdit #name').attr('value',res.name);
 				$('#formEdit #origin_price').attr('value',res.origin_price);
-				$('#formEdit #sale_price').attr('value',res.sale_price);
+				$('#formEdit #price').attr('value',res.price);
 				$('#formEdit #title-name').attr('value',res.name);
 				$('#formEdit #description').text(res.description);
 				$('#formEdit #edit-category-old').attr('value',res.category_info.id);
@@ -504,7 +504,7 @@ Products
 		newInfor.append('category_id',$('#formEdit #category_id option:selected').val());
 		newInfor.append('thumbnail',thumbnail);
 		newInfor.append('origin_price',$('#formEdit #origin_price').val());
-		newInfor.append('sale_price',$('#formEdit #sale_price').val());
+		newInfor.append('price',$('#formEdit #price').val());
 
 		$.ajax({
 			url: '{{ asset('') }}admin/product/update/'+id,

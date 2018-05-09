@@ -88,9 +88,11 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 	Route::group(['prefix' => 'booking'], function(){
 
-		Route::get('/', 'Admin\BookingController@getIndex')->name('admin.booking.list');
+		Route::get('/', 'Admin\BookingController@getIndex')->name('admin.booking.list');		
 
 		Route::get('/listBooking', 'Admin\BookingController@anyData')->name('admin.booking.dataTable');
+
+		Route::get('/{id}', 'Admin\BookingController@getBookingDetail');
 
 		Route::delete('/delete/{id}', 'Admin\BookingController@destroy');
 
@@ -133,14 +135,16 @@ Route::get('/about-us', 'Restaurant\HomeController@getAboutUs')->name('restauran
 
 Route::get('/booking', 'Restaurant\HomeController@getFormBooking')->name('restaurant.booking');
 
-Route::post('/booking', 'Restaurant\HomeController@booking')->name('restaurant.process_booking');
-
 Route::get('/food', 'Restaurant\HomeController@getFood')->name('restaurant.food');
 
 Route::get('/drink', 'Restaurant\HomeController@getDrink')->name('restaurant.drink');
 
-Route::get('/booking-food/{id}','Restaurant\BookingController@booking');
+Route::get('/booking/{id}','Restaurant\BookingController@bookProduct');
 
-Route::get('/booking-food/increase/{rowId}','Restaurant\BookingController@increase');
+Route::get('/booking/increase/{rowId}','Restaurant\BookingController@increase');
+
+Route::get('/booking/decrease/{rowId}','Restaurant\BookingController@decrease');
 
 Route::get('/booking-list','Restaurant\BookingController@getBookList')->name('restaurant.booking.list');
+
+Route::post('/booking', 'Restaurant\BookingController@booking')->name('restaurant.process_booking');

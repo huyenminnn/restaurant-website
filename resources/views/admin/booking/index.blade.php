@@ -85,105 +85,87 @@ Restaurant
 													</div>
 												</td>
 												<td>
-											</tr>
-											<tr>
-												<td colspan="2">
-													<div class="form-group">
-														<label for="">Message</label>
-														<textarea name="message" class="form-control" id="message" style="height: 150px"></textarea>
-													</div>													
-												</td>
-											</tr>
-										</table>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-											<button type="submit" class="btn btn-primary">Create</button>
-										</div>
-									</form>
+												</tr>
+												<tr>
+													<td colspan="2">
+														<div class="form-group">
+															<label for="">Message</label>
+															<textarea name="message" class="form-control" id="message" style="height: 150px"></textarea>
+														</div>													
+													</td>
+												</tr>
+											</table>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary">Create</button>
+											</div>
+										</form>
+									</div>
+
 								</div>
-								
 							</div>
 						</div>
 					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table table-hover table-bordered" id="tbl-booking">
+							<thead>
+								<tr>
+									<th width="5%" class="text-center">ID</th>
+									<th>Name</th>
+									<th>Phone</th>
+									<th>Email</th>
+									<th>Date</th>
+									<th>Time</th>
+									<th>Guess</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<!-- /.box-body -->
 				</div>
-				<!-- /.box-header -->
-				<div class="box-body">
-					<table class="table table-hover table-bordered" id="tbl-booking">
-						<thead>
-							<tr>
-								<th width="5%" class="text-center">ID</th>
-								<th>Name</th>
-								<th>Phone</th>
-								<th>Email</th>
-								<th>Date</th>
-								<th>Time</th>
-								<th>Number of guess</th>
-								<th>Status</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody></tbody>
-					</table>
-				</div>
-				<!-- /.box-body -->
+				<!-- /.box -->
 			</div>
-			<!-- /.box -->
+			<!-- /.col -->
 		</div>
-		<!-- /.col -->
-	</div>
-	<!-- /.row -->
+		<!-- /.row -->
 
-	{{-- modal Show --}}
-	{{-- <div class="modal fade" id="modalShow">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Tash Res: </h4>
-				</div>
-				<div class="modal-body">
-					<h4 class="text-center">Details of Category: <span id="show-name-title"></span></h4>
-					<br>
-					<table class="table table-hover">	
-
-						<tr>
-							<th>ID</th>
-							<td id="show-id"></td>
-						</tr>
-						<tr>
-							<th>Name</th>
-							<td id="show-name"></td>
-						</tr>
-						<tr>
-							<th>Super Category</th>
-							<td id="show-super-cate"></td>
-						</tr>
-						<tr>
-							<th>Description</th>
-							<td id="show-description"></td>
-						</tr>
-						<tr>
-							<th>Level</th>
-							<td id="show-level"></td>
-						</tr>
-						<tr>
-							<th>Created at</th>
-							<td id="show-created-at"></td>
-						</tr>
-						<tr>
-							<th>Lastest updated</th>
-							<td id="show-updated-at"></td>
-						</tr>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		{{-- modal Show --}}
+		<div class="modal fade" id="modalShow">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Tash Res: Details of Booking</h4>
+					</div>
+					<div class="modal-body">
+						
+						<br>
+						<table class="table table-hover" id="tbl-show-booking">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Thumbnail</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Quantity</th>
+									<th>Subtotal</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div> --}}
 
-	{{-- modal Edit --}}
+		{{-- modal Edit --}}
 	{{-- <div class="modal fade" id="modalEdit">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -215,7 +197,6 @@ Restaurant
 								@endforeach											
 							</select>
 						</div>										
-
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-primary">Update</button>
@@ -234,13 +215,11 @@ Restaurant
 <script src="{{ asset('admins/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/admin_category.js') }}"></script>
 <script >
-
 	$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN' : $('meta[name="csrf_token"]').attr('content')
 		}
 	});
-
 	$(function() {
 		$('#tbl-booking').DataTable({
 			processing: true,
@@ -259,11 +238,9 @@ Restaurant
 			]
 		});
 	});
-
 	$('#formAdd').on('submit',  function(event) {
 		//prevent open new window 
 		event.preventDefault();
-
 		$.ajax({
 			url: '{{ route('admin.booking.store') }}',
 			type: 'POST',
@@ -278,12 +255,8 @@ Restaurant
 				number_of_guess: $('#number_of_guess').val(),
 			},
 			success: function(response){
-
 				$('#modalAdd').modal('hide');
-
 				$('#tbl-booking').prepend('<tr id='+response.id+'><td>'+response.id+'</td><td>'+response.name+'</td><td>'+response.phone+'</td><td>'+response.email+'</td><td>'+response.date+'</td><td>'+response.time+'</td><td>'+response.number_of_guess+'</td><td>'+status+'</td><td><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-id='+response.id+'></a>&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='+response.id+'></a>&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='+response.id+'></a></td></tr>');
-
-
 				toastr["success"]("Add new Category successfully!");
 			},
 			error: function(xhr, status, errorThrown){
@@ -295,16 +268,12 @@ Restaurant
 			} 
 		})
 	});
-
 	//delete 
 	$('#tbl-booking').on('click','.btnDelete', function(e){
-
 		var id = $(this).data('id');
 		
 		var parent = $(this).parent();
-
 		e.preventDefault();
-
 		swal({			
 			title: "Are you sure?",
 			text: "Once deleted, you will delete this booking!",
@@ -313,14 +282,10 @@ Restaurant
 			dangerMode: true,
 		})
 		.then((willDelete) => {
-
 			if (willDelete) {
-
 				$.ajax({
-
 					type: "delete",
 					url: '{{ asset('') }}admin/booking/delete/'+id,
-
 					success: function(res)
 					{
 						toastr.success('The booking has been deleted!');
@@ -328,64 +293,50 @@ Restaurant
 							parent.closest("tr").remove();
 						});
 					},
-
 					error: function (xhr, ajaxOptions, thrownError) {
 						console.log(xhr.responseJSON.errors);
 						toastr.error(thrownError);
 					}
 				});				
-
 			} else {
 				swal("The booking is safety!");
 			}
 		});
 	});
-
-	$('#tbl-category').on('click', '.btnShow', function(e){
+	$('#tbl-booking').on('click', '.btnShow', function(e){
 		e.preventDefault();
-
 		
-		$('#modalShow').modal('show');
-
 		var id = $(this).data('id');
 		// alert(id);
-
 		$.ajax({
-			url: '{{ asset('') }}admin/category/'+id,
+			url: '{{ asset('') }}admin/booking/'+id,
 			type: 'GET',
 			success: function(res)
 			{				
-				$('#show-id').text(res.id);
-				$('#show-name').text(res.name);
-				$('#show-name-title').text(res.name);
-				$('#show-level').text(res.level);
-				$('#show-description').text(res.description);
-				$('#show-super-cate').text(res.parent);
-				$('#show-created-at').text(res.created_at);
-				$('#show-updated-at').text(res.updated_at);
+				var qty = res.length;
+				$('#modalShow').modal('show');	
+				$('#tbl-show-booking tbody tr').remove();
+				res.forEach(function(item) {
+					// console.log(item);
+					$('#tbl-show-booking').prepend('<tr style="font-weight: bold;"><td>'+item.id+'</td><td style="width: 20%"><img src="{{ asset('') }}'+item.thumbnail+'" class=" img-responsive img-rounded" style=""></td><td>'+item.name+'</td><td class="text-right">'+item.price+' $/ <strike style="color: red">'+item.origin_price+'$</strike></td><td class="text-center">'+item.quantity+'</td><td class="text-right" style="color: red">'+item.price*item.quantity+'$</td></tr>');
+				});
+				
+				
 			},
-
 			error: function (xhr, ajaxOptions, thrownError) {
 				console.log(xhr.responseJSON.errors);
 				toastr.error(thrownError);
 			}
 		})
 	})
-
 	$('#tbl-category').on('click', '.btnEdit', function(e){
-
 		e.preventDefault();
-
 		var id = $(this).data('id');
-
 		$('#modalEdit').modal('show');
-
 		document.getElementById('formEdit').reset();
-
 		$.ajax({
 			url: '{{ asset('') }}admin/category/edit/'+id,
 			type: 'GET',
-
 			success: function(res){
 				// alert(res.id);
 				$('#edit-title-name').text(res.name);
@@ -399,24 +350,17 @@ Restaurant
 				$('#edit-id').attr('value',res.id);
 				$('#edit-has-sub-cate').attr('value',res.has_sub_cate);
 			},
-
 			error: function(xhr, ajaxOptions, thrownError){
 				console.log(xhr.responseJSON.errors);
 				toastr.error(thrownError);
 			}
 		})		
 	})
-
 	$('#formEdit').on('submit',function(e){
-
 		e.preventDefault();
-
 		var id =  $('#formEdit #edit-id').attr('value');
-
 		var row = document.getElementById(id);
-
 		$.ajax({
-
 			url: '{{ asset('') }}admin/category/update/'+id,
 			type: 'PUT',
 			data: {
@@ -429,10 +373,7 @@ Restaurant
 				$('#modalEdit').modal('hide');
 				row.remove();
 				$('#tbl-category').prepend('<tr id='+response.id+'><td>'+response.id+'</td><td>'+response.name+'</td><td>'+response.parent+'</td><td>'+response.level+'</td><td>'+response.description+'</td><td>'+response.created_at+'</td><td><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-id='+response.id+'></a>&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='+response.id+'></a>&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='+response.id+'></a></td>');
-
 				toastr['success']('Update successfully!');
-
-
 			},
 			error: function(xhr, ajaxOptions, thrownError){
 				// toastr['error'](response.error);

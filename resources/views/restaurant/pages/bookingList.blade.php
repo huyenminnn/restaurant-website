@@ -62,7 +62,7 @@
 											</tr>
 											@endforeach
 											<tr class="text-right">
-												<td colspan="5" ><b>TAX (21%)</b></td>
+												<td colspan="5" ><b>TAX (10%)</b></td>
 												<td><b style="color: red" id="tax">{{$tax}} $</b></td>
 											</tr>
 											<tr class="text-right">
@@ -89,7 +89,7 @@
 											<a href="{{ route('restaurant.food') }}" class="btn btn-danger fa fa-cutlery"> More Food</a>
 										</li>
 										
-										<li><a href="" class="btn btn-primary fa fa-credit-card"> <b>Booking</b></a></li>
+										<li><a href="{{ route('restaurant.booking') }}" class="btn btn-primary fa fa-credit-card"> <b>Booking</b></a></li>
 
 									</ul>
 								</div>
@@ -109,7 +109,9 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<div id="googleMap" style="height:340px;"></div>
+				<div id="googleMap" style="height:340px;">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.639319006184!2d105.84069301435818!3d21.007090393894917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab8ac0a8def5%3A0xa76484d5add02445!2zMSDEkOG6oWkgQ-G7kyBWaeG7h3QsIELDoWNoIEtob2EsIEhhaSBCw6AgVHLGsG5nLCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1525793441266" width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
+				</div>
 			</div>
 		</div>     
 	</div>
@@ -119,13 +121,13 @@
 
 @section('js.section')
 <script>
-	$('.btnIncrease').on('click', function(event) {
+	$('#tblBooking').on('click', '.btnIncrease',function(event) {
 		event.preventDefault();
 		var rowId = $(this).data('item-rowid');
 		var row = document.getElementById('row-'+rowId);
 		// alert(row);
 		$.ajax({
-			url: '{{ asset('') }}booking-food/increase/'+rowId,
+			url: '{{ asset('') }}booking/increase/'+rowId,
 			type: 'GET',			
 			success: function(res) {
 				toastr['success']('Update quantity successfull!');
@@ -134,6 +136,29 @@
 				$('#tblBooking').prepend('<tr style="font-weight: bold;" id="row-'+res.item['rowId']+'"><td>'+res.item['id']+'</td><td style="width: 20%"><img src="{{ asset('') }}'+res.item['options']['thumbnail']+'" class=" img-responsive img-rounded" style=""></td><td>'+res.item['name']+'</td><td class="text-right">'+res.item['price']+' $/ <strike style="color: red">'+res.item['options']['origin_price']+'$</strike></td><td class="text-center"><a href="" class="btn-primary btn btn-sm fa fa-minus btnDecrease" data-item-rowid="'+res.item['rowId']+'"></a>&nbsp;'+res.item['qty']+'&nbsp;<a href="" class="btn-primary btn btn-sm fa fa-plus btnIncrease" data-item-rowid="'+res.item['rowId']+'"></a></td><td class="text-right" style="color: red">'+res.item['price']*res.item['qty']+'$</td></tr>');
 				$('#total').text(res.total);
 				$('#tax').text(res.tax);
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				toastr['error']('Update quantity failed!');
+			}
+		})
+	});
+
+	$('#tblBooking').on('click','.btnDecrease', function(event) {
+		event.preventDefault();
+		var rowId = $(this).data('item-rowid');
+		var row = document.getElementById('row-'+rowId);
+		// alert(row);
+		$.ajax({
+			url: '{{ asset('') }}booking/decrease/'+rowId,
+			type: 'GET',			
+			success: function(res) {
+				toastr['success']('Update quantity successfull!');
+				row.remove();
+				// alert(res);
+				$('#total').text(res.total);
+				$('#tax').text(res.tax);
+				$('#tblBooking').prepend('<tr style="font-weight: bold;" id="row-'+res.item['rowId']+'"><td>'+res.item['id']+'</td><td style="width: 20%"><img src="{{ asset('') }}'+res.item['options']['thumbnail']+'" class=" img-responsive img-rounded" style=""></td><td>'+res.item['name']+'</td><td class="text-right">'+res.item['price']+' $/ <strike style="color: red">'+res.item['options']['origin_price']+'$</strike></td><td class="text-center"><a href="" class="btn-primary btn btn-sm fa fa-minus btnDecrease" data-item-rowid="'+res.item['rowId']+'"></a>&nbsp;'+res.item['qty']+'&nbsp;<a href="" class="btn-primary btn btn-sm fa fa-plus btnIncrease" data-item-rowid="'+res.item['rowId']+'"></a></td><td class="text-right" style="color: red">'+res.item['price']*res.item['qty']+'$</td></tr>');
+				
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
 				toastr['error']('Update quantity failed!');

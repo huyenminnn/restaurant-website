@@ -52,7 +52,7 @@ http://www.templatemo.com/free-website-templates/417-grill
                         <div class="cart-info">
                             <a href="{{ route('restaurant.booking.list') }}" >
                                 <i class="fa fa-shopping-cart" style="height: 25px"></i>
-                                (<span class="total-items"></span> items)
+                                (<span class="total-items">@yield('items')</span> items)
                             </a>                            
                         </div>
                     </div>
@@ -195,7 +195,7 @@ http://www.templatemo.com/free-website-templates/417-grill
     <script src="{{ asset('restaurant/js/vendor/jquery-1.11.0.min.js') }}"></script>
     <!-- jQuery 3 -->
     <script src="{{ asset('admins/bower_components/jquery/dist/jquery.min.js') }}"></script>
-    {{-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script> --}}
+    
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ asset('admins/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('restaurant/js/vendor/jquery.gmap3.min.js') }}"></script>

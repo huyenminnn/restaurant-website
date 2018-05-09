@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Datatables;
 use App\Booking;
+use App\BookingDetails;
+use App\Product;
 
 class BookingController extends Controller
 {
@@ -42,11 +44,27 @@ class BookingController extends Controller
     	return response()->json(['done']);
     }
 
+
+    /**
+     * save an booking into db
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function store(Request $request)
     {
     	$data = $request->all();
     	$data['status'] = '1';
-
     	return Booking::create($data);
+    }
+
+
+    /**
+     * get booking detail by id
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function getBookingDetail($id)
+    {
+        return Product::join('bookingdetails', 'products.id','=', 'bookingdetails.product_id')->where('bookingdetails.booking_id','=',$id)->get();
     }
 }
