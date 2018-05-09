@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
-@section('css.section')
-<link rel="stylesheet" href="{{ asset('admin_assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+@section('css.dataTable')
+<link rel="stylesheet" href="{{ asset('admins/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 <style>
 #modalShow th{
 	width: 25%;
@@ -25,6 +25,46 @@ Admin
 				<div class="box-header">
 					<h3 class="box-title">Table of Admins</h3>
 					<a class="btn btn-primary fas fa-plus " data-toggle="modal" href='#modalAdd' style="float: right">&nbsp;<i class="fas fa-users"></i></a>
+					<div class="modal fade" id="modalAdd">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">Add new admin</h4>
+								</div>
+								<div class="modal-body">
+									<form action="" method="POST" role="form" id="formAdd" name="formAdd">
+										@csrf
+										<div class="form-group">
+											<label for="">Name</label>
+											<input type="text" class="form-control" id="name" placeholder="Name" name="name">
+										</div>
+										<div class="form-group">
+											<label for="">Password</label>
+											<input type="text" class="form-control" id="password" placeholder="password" name="password">
+										</div>
+										<div class="form-group">
+											<label for="">Email</label>
+											<input type="text" class="form-control" id="email" placeholder="email" name="email">
+										</div>
+										<div class="form-group">
+											<label for="">Birthday</label>
+											<input type="text" class="form-control" id="birthday" placeholder="birthday" name="birthday">
+										</div>								
+										<div class="form-group">
+											<label for="">Phone</label>
+											<input type="text" class="form-control" id="phone" placeholder="phone" name="phone">
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-primary">Create</button>
+										</div>
+									</form>
+								</div>
+								
+							</div>
+						</div>
+					</div>
 
 				</div>
 				<!-- /.box-header -->
@@ -34,9 +74,9 @@ Admin
 							<tr>
 								<th width="5%" class="text-center">ID</th>
 								<th>Name</th>
-								<th>Avatar</th>
+								 <th>Avatar</th> 
 								<th width="15%">Email</th>
-								{{-- <th>Level</th> --}}
+								<th>Birthday</th>
 								<th>Phone</th>
 								<th width="15%">Created at</th>
 								<th width="15%">Action</th>
@@ -55,40 +95,58 @@ Admin
 </section>
 
 <!-- Modal Shows-->
-{{-- <div id="modalShow" class="modal fade" role="dialog">
-	<div class="modal-dialog">
+<div class="modal fade" id="modalShow">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Tash Res: </h4>
+				</div>
+				<div class="modal-body">
+					<h4 class="text-center">Details of Admin: <span id="show-name-title"></span></h4>
+					<br>
+					<table class="table table-hover">	
 
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Information of admin: <span id="showT-name"></span></h4>
+						<tr>
+							<th>ID</th>
+							<td id="show-id"></td>
+						</tr>
+						<tr>
+							<th>Avatar</th>
+							<td id="show-avt"></td>
+						</tr>
+						<tr>
+							<th>Name</th>
+							<td id="show-name"></td>
+						</tr>
+						<tr>
+							<th>Birthday</th>
+							<td id="show-birthday"></td>
+						</tr>
+						<tr>
+							<th>Email</th>
+							<td id="show-email"></td>
+						</tr>
+						<tr>
+							<th>Phone</th>
+							<td id="show-phone"></td>
+						</tr>
+						<tr>
+							<th>Created at</th>
+							<td id="show-created-at"></td>
+						</tr>
+						<tr>
+							<th>Lastest updated</th>
+							<td id="show-updated-at"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
 			</div>
-			<div class="modal-body">
-				<table class="table table-hover">
-					<tr>
-						<th>ID</th>
-						<td id="showT-id"></td>
-					</tr>
-					<tr>
-						<th>Name</th>
-						<td id="showT-name-1"></td>
-					</tr>
-					<tr>
-						<th>Created_at</th>
-						<td id="showT-created-at"></td>
-					</tr>
-					<tr>
-						<th>Lastest updated</th>
-						<td id="showT-updated-at"></td>
-					</tr>
-
-				</table>
-			</div>
-
 		</div>
 	</div>
-</div> --}}
 <!-- ./ModalShow -->
 
 <!-- Modal Edit-->
@@ -123,10 +181,11 @@ Admin
 <!-- ./ModalEdit -->
 @endsection
 
-@section('js.section')
-<script src="{{ asset('admin_assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('admin_assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@section('js.dataTable')
+<script src="{{ asset('admins/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('admins/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>--> 
+<script src="{{ asset('js/admin_admins.js') }}"></script> 
 <script>
 
 	$.ajaxSetup({
@@ -148,6 +207,7 @@ Admin
 			},
 			{ data: 'email', name: 'email' },
 			{ data: 'phone', name: 'phone' },
+			{ data: 'birthday', name: 'birthday' },
 			{ data: 'created_at', name: 'created_at' },
 			{ data: 'action', name: 'action', orderable: false, searchable: false}
 			]
@@ -155,7 +215,7 @@ Admin
 	});
 
 	//add new admin
-	$('#formAddAdmin').on('submit', function(event) {
+	$('#formAdd').on('submit', function(event) {
 		//khong tao cua so moi
 		event.preventDefault();
 
@@ -165,15 +225,23 @@ Admin
 			url: '{{ route('admin.admins.store') }}',
 			data: {
 				name: $("#name").val(),
+				email: $('#email').val(),
+				avatar: $('#avatar').val(),
+				phone: $('#phone').val(),
+				birthday: $('#birthday').val(),
+				password: $('#password').val(),
 			},
 
 			success: function (response) {
 				// alert(response.message);
 				$('#modalAdd').modal('hide');
 
+				
+
+				$('#tbl-admins').prepend('<tr><td width="5%">'+response.id+'</td><td>'+response.name+'</td><td>'+response.avatar+'</td><td>'+response.email+'</td><td>'+response.birthday+'</td><td>'+response.phone+'</td><td>'+response.created_at+'</td><td width="20%"><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id="'+response.id+'"></a><td></tr>');
+				
 				toastr["success"]("Add new admin successfully!");
 
-				$('#tbladmin').prepend('<tr><td width="5%">'+response.id+'</td><td>'+response.name+'</td><td>'+response.created_atd+'</td><td>'+response.updated_at+'</td><td width="20%"><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id="'+response.id+'"></a><td></tr>');
 
 			},
 			error: function (xhr, status, errorThrown){
@@ -315,4 +383,5 @@ Admin
 	});
 	
 </script>
-@endsection
+@endsection 
+

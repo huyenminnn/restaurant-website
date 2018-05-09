@@ -109,7 +109,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 		Route::delete('/delete/{id}', 'Admin\PageController@destroyImgae');
 	});
 
-	Route::group(['prefix' => 'admins'], function() {
+	Route::group(['prefix' => 'admins'], function(){
 
 		Route::get('/','Admin\AdminController@adminIndex')->name('admin.admins.list');
 
