@@ -88,9 +88,11 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 	Route::group(['prefix' => 'booking'], function(){
 
-		Route::get('/', 'Admin\BookingController@getIndex')->name('admin.booking.list');
+		Route::get('/', 'Admin\BookingController@getIndex')->name('admin.booking.list');		
 
 		Route::get('/listBooking', 'Admin\BookingController@anyData')->name('admin.booking.dataTable');
+
+		Route::get('/{id}', 'Admin\BookingController@getBookingDetail');
 
 		Route::delete('/delete/{id}', 'Admin\BookingController@destroy');
 
