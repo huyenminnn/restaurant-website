@@ -67,7 +67,7 @@
                         </a>
                         <a class="btn btn-link-1 btn-link-1-twitter btn-lg fa fa-twitter" href="">
                         </a>
-                        <a class="btn btn-link-1 btn-link-1-google-plus btn-lg fa fa-google-plus" href="" >
+                        <a class="btn btn-link-1 btn-link-1-google-plus btn-lg fa fa-google-plus" href="{{ route('admin.login.google') }}" >
                         </a>
                     </span>
                 </h3>

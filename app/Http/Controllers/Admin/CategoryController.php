@@ -16,9 +16,11 @@ class CategoryController extends Controller
  	*/
  	public function getIndex()
  	{
+ 		$admin_info = \Auth::guard('admin')->user();
  		$categories = Category::where('level','<',3)->get();
  		return view('admin.categories.index',[
  			'categories' => $categories,
+ 			'admin_info' => $admin_info,
  		]);
  	}
 

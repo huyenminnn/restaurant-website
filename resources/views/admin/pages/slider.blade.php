@@ -14,6 +14,13 @@ Slider
 Restaurant
 @endsection
 
+@section('admin_name')
+	{{$admin_info['name']}}
+@endsection
+
+@section('admin_profile')
+	{{$admin_info['avatar']}}
+@endsection
 
 @section('content')
 <!-- Main content -->
@@ -23,7 +30,7 @@ Restaurant
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">Slider</h3>
-					<a class="btn btn-primary fas fa-plus " data-toggle="modal" href='#modalAdd' style="float: right">&nbsp;<i class="fas fa-bars"></i></a>
+					<a class="btn btn-primary fas fa-plus " data-toggle="modal" href='' style="float: right" id="btnAdd">&nbsp;<i class="fas fa-bars"></i></a>
 					<div class="modal fade" id="modalAdd">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -87,11 +94,11 @@ Restaurant
 						<thead>
 							<tr>
 								<th width="5%" class="text-center">ID</th>
-								<th>Image</th>
-								<th>Title</th>
+								<th width="15%">Image</th>
+								<th width="10%">Title</th>
 								<th>Description</th>
 								<th>Status</th>
-								<th>Created at</th>
+								<th width="15%">Created at</th>
 								<th width="15%">Action</th>
 							</tr>
 						</thead>
@@ -130,7 +137,7 @@ Restaurant
 			columns: [
 			{ data: 'id', name: 'id' },
 			{ data: 'image', name: 'image', render: function(data, type, full, meta){
-				return '<img src=\"http://tash.restaurant/'+data+'" alt="" height="80px">' }
+				return '<img src=\"http://tashres.com/'+data+'" alt="" height="80px" class="img-responsive">' }
 			},
 			{ data: 'title', name: 'title' },
 			{ data: 'description', name: 'description' },			
@@ -140,6 +147,11 @@ Restaurant
 			]
 		});
 	});
+
+	$('#btnAdd').on('click',function(event) {
+		$('#modalAdd').modal('show');
+		// $('#formAdd').reset();s
+	})
 
 	$('#formAdd').on('submit',  function(event) {
 		//prevent open new window 
@@ -166,7 +178,7 @@ Restaurant
 				// alert(response.message);
 				$('#modalAdd').modal('hide');
 
-				$('#tbl-slider').prepend('<tr id='+response.id+'><td>'+response.id+'</td><td style="width: 20%"><img src="{{ asset('') }}'+response.image+'" class=" img-responsive img-rounded" style=""></td><td>'+response.title+'</td><td>'+response.description+'</td><td>'+response.status+'</td><td>'+response.created_at+'</td><td><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-id='+response.id+'></a>&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='+response.id+'></a>&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='+response.id+'></a></td></tr>');
+				$('#tbl-slider').prepend('<tr id='+response.id+'><td>'+response.id+'</td><td style="width: 20%"><img src="{{ asset('') }}'+response.image+'" class=" img-responsive" style=""></td><td>'+response.title+'</td><td>'+response.description+'</td><td>'+response.status+'</td><td>'+response.created_at+'</td><td><a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='+response.id+'></a>&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='+response.id+'></a></td></tr>');
 
 
 				toastr["success"]("Add new Image successfully!");
@@ -212,7 +224,7 @@ Restaurant
 					},
 
 					error: function (xhr, ajaxOptions, thrownError) {
-						console.log(xhr.responseJSON.errors);
+						// console.log(xhr.responseJSON.errors);
 						toastr.error(thrownError);
 					}
 				});				

@@ -135,6 +135,6 @@ class BookingController extends Controller
 			}
 		}
 		\Cart::destroy();
-		return redirect()->back();
+		return redirect()->route('restaurant.home');
 	}
 }

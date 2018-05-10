@@ -165,6 +165,9 @@ return [
 
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
 
+        //login with socialite
+        Laravel\Socialite\SocialiteServiceProvider::class,
+
     ],
 
     /*
@@ -218,6 +221,8 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

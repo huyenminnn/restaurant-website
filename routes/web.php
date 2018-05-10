@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::group(['prefix' => 'admin'], function() {
     // Authentication Routes...
-	Route::get('', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
+	Route::get('', 'AdminAuth\LoginController@showLoginForm');
 	Route::get('login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
 
 	Route::post('login', 'AdminAuth\LoginController@login')->name('admin.login.process');
@@ -36,6 +36,12 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::post('password/reset', 'AdminAuth\ResetPasswordController@reset');
 
 });
+
+
+//Google login
+Route::get('login/google', 'AdminAuth\GoogleController@redirectToProvider')->name('admin.login.google');
+
+Route::get('login/google/callback', 'AdminAuth\GoogleController@handleProviderCallback');
 
 Route::prefix('admin')->middleware('admin')->group(function(){
 
@@ -102,13 +108,18 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 	Route::group(['prefix' => 'pages'], function(){
 		
+		//slide
 		Route::get('/slider', 'Admin\PageController@getSlider')->name('admin.pages.slider');
 
 		Route::get('/loadSlider', 'Admin\PageController@anyData')->name('admin.pages.dataTable');
 
 		Route::post('/slider', 'Admin\PageController@storeImage')->name('admin.pages.store');
 
-		Route::delete('/delete/{id}', 'Admin\PageController@destroyImgae');
+		Route::delete('/delete/{id}', 'Admin\PageController@destroyImage');
+
+		//about us page
+		Route::get('/about-us', 'Admin\PageController@getAboutUs')->name('admin.pages.aboutUs');
+		
 	});
 
 	Route::group(['prefix' => 'admins'], function(){
@@ -117,13 +128,13 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 		Route::get('/listUser','Admin\AdminController@getListUserDatatables')->name('admin.admins.dataTable');
 
-		Route::get('/{id}','Admin\AdminController@adminUserShow')->name('admin.admins.show');
+		Route::get('/{id}','Admin\AdminController@adminShow')->name('admin.admins.show');
 
 		Route::post('/store','Admin\AdminController@adminUserStore')->name('admin.admins.store');
 
 		Route::put('/update/{id}','Admin\AdminController@adminUserUpdate')->name('admin.admins.update');
 
-		Route::delete('/delete/{id}','Admin\AdminController@adminUserDelete')->name('admin.admins.delete');
+		Route::delete('/delete/{id}','Admin\AdminController@adminDelete')->name('admin.admins.delete');
 	});
 
 });
@@ -148,3 +159,7 @@ Route::get('/booking/decrease/{rowId}','Restaurant\BookingController@decrease');
 Route::get('/booking-list','Restaurant\BookingController@getBookList')->name('restaurant.booking.list');
 
 Route::post('/booking', 'Restaurant\BookingController@booking')->name('restaurant.process_booking');
+
+
+
+

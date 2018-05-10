@@ -150,16 +150,18 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <img src="{{ asset('') }}@yield('admin_profile')" class="user-image" alt="User Image">
+              <span class="hidden-xs">
+                @yield('admin_name')
+              </span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="" class="img-circle" alt="User Image">
+                <img src="{{ asset('') }}@yield('admin_profile')" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  @yield('admin_name')
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -218,10 +220,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="" class="img-circle" alt="User Image">
+          <img src="{{ asset('') }}@yield('admin_profile')" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>@yield('admin_name')</p>
           <a href="#"><i class="fas fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -329,7 +331,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('admin.pages.slider') }}"><i class="fas fa-comment"></i> &nbsp;Slider</a></li>
-            <li><a href=""><i class="fas fa-comment"></i> &nbsp;About us</a></li>
+            <li><a href="{{ route('admin.pages.aboutUs') }}"><i class="fas fa-comment"></i> &nbsp;About us</a></li>
           </ul>
         </li>
   
@@ -375,7 +377,7 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+ {{--  <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fas fa-home"></i></a></li>
@@ -451,7 +453,7 @@
       </div>
       <!-- /.tab-pane -->
     </div>
-  </aside>
+  </aside> --}}
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->

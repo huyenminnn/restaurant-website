@@ -14,6 +14,13 @@ Booking
 Restaurant
 @endsection
 
+@section('admin_name')
+	{{$admin_info['name']}}
+@endsection
+
+@section('admin_profile')
+	{{$admin_info['avatar']}}
+@endsection
 
 @section('content')
 <!-- Main content -->

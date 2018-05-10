@@ -13,7 +13,10 @@ class BookingController extends Controller
 {
 	public function getIndex()
 	{
-		return view('admin.booking.index');
+        $admin_info = \Auth::guard('admin')->user();
+		return view('admin.booking.index',[
+            'admin_info' => $admin_info,
+        ]);
 	}
 
     /**

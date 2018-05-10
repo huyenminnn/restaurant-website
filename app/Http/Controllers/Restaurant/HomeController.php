@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Category;
 use App\Product;
 use App\Booking;
+use App\Slider;
 use Validator;
 
 class HomeController extends Controller
@@ -19,7 +20,11 @@ class HomeController extends Controller
     {
         $rows = \Cart::content();
         $items = $rows->count();
-    	return view('restaurant.index',['items'=>$items]);
+        $slides = Slider::getSlide();
+    	return view('restaurant.index',[
+            'items'=>$items,
+            'slides' => $slides,
+        ]);
     }
 
 

@@ -6,12 +6,21 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Slider;
 use Yajra\Datatables\Datatables;
+use Auth;
 
 class PageController extends Controller
 {
+
+    /**
+     * display interface
+     * @return [type] [description]
+     */
     public function getSlider()
     {
-    	return view('admin.pages.slider');
+        $admin_info = Auth::guard('admin')->user();
+    	return view('admin.pages.slider',[
+            'admin_info' => $admin_info,
+        ]);
     }
 
     /**
@@ -31,12 +40,24 @@ class PageController extends Controller
         ->make(true);
     }
 
+
+    /**
+     * delete an imgae from slide
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function destroyImage($id)
     {
     	Slider::find($id)->delete();
-    	return respone()->json(['done']);
+    	return response()->json(['done']);
     }
 
+
+    /**
+     * save an image-slide to db
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function storeImage(Request $request)
     {
         $data = $request->all();
@@ -63,5 +84,17 @@ class PageController extends Controller
         $slider = Slider::create($slide);
         
         return $slider;
+    }
+
+    /**
+     * diaplay interface about-us content management
+     * @return [type] [description]
+     */
+    public function getAboutUs()
+    {
+        $admin_info = Auth::guard('admin')->user();
+        return view('admin.pages.aboutUs',[
+            'admin_info' => $admin_info,
+        ]);
     }
 }
